@@ -43,10 +43,13 @@ public class Player : MonoBehaviour, IDaño
     public void RecibirDaño(int cantidad)
     {
         life -= cantidad;
+        Debug.Log($"Player ha recibido daño. Vida actual: {life}"); // Mensaje en la consola
+
         if (life <= 0)
         {
             // Muerte del jugador
             Debug.Log("Player ha muerto");
+            Destroy(gameObject); // Destruye el jugador
             // Añade aquí la lógica para la muerte del jugador, como reiniciar el nivel o volver al menú
         }
     }
@@ -57,11 +60,14 @@ public class Player : MonoBehaviour, IDaño
         {
             isGrounded = true;
         }
-
-        if (collision.gameObject.TryGetComponent<IRecolectable>(out IRecolectable recolectable))
+        else if (collision.gameObject.CompareTag("Moneda"))
         {
-            recolectable.Recolectar();
-            score++;
+            Moneda moneda = collision.gameObject.GetComponent<Moneda>();
+            if (moneda != null)
+            {
+                moneda.Recolectar(); // La moneda se recolecta y se destruye
+                IncrementarPuntaje(); // Incrementar el puntaje
+            }
         }
         else if (collision.gameObject.TryGetComponent<IDaño>(out IDaño daño))
         {
@@ -75,5 +81,11 @@ public class Player : MonoBehaviour, IDaño
         {
             isGrounded = false;
         }
+    }
+
+    private void IncrementarPuntaje()
+    {
+        score++;
+        Debug.Log($"Puntaje: {score}"); // Feedback en la consola
     }
 }

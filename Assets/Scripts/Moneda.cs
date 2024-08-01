@@ -16,9 +16,9 @@ public class Moneda : MonoBehaviour, IRecolectable
     {
         if (!recolectada)
         {
-            Debug.Log("Moneda recolectada +1 punto");
             recolectada = true; // Marca la moneda como recolectada
             onRecolectar.Invoke(); // Llama a los suscriptores del evento
+            Debug.Log("Moneda recolectada +1 punto"); // Feedback en la consola
             Destroy(gameObject);  // Destruye la moneda
         }
     }
@@ -27,7 +27,7 @@ public class Moneda : MonoBehaviour, IRecolectable
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Recolectar();
+            Recolectar(); // Llama a Recolectar cuando colisiona con el jugador
         }
     }
 }

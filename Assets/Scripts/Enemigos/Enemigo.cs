@@ -30,5 +30,10 @@ public class Enemigo : MonoBehaviour, IDaño
         {
             onRecibirDaño.Invoke(1);
         }
+        else if (collision.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Enemigo ha colisionado con el Player, se ha destruido y dañado al jugador!");
+            Destroy(gameObject); // Destruye el enemigo al colisionar con el jugador
+        }
     }
 }
