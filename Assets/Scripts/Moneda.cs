@@ -22,4 +22,12 @@ public class Moneda : MonoBehaviour, IRecolectable
             Destroy(gameObject);  // Destruye la moneda
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Recolectar();
+        }
+    }
 }

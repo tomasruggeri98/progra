@@ -10,6 +10,10 @@ public class Player : MonoBehaviour, IDaño
     public DañoEvento onRecibirDaño;
 
     private Rigidbody2D rb;
+    private bool isGrounded;
+    public Transform groundCheck;        // Punto de chequeo para el suelo
+    public float checkRadius = 0.2f;     // Radio del área de chequeo del suelo
+    public LayerMask groundLayer;        // Capa del suelo
 
     private void Start()
     {
@@ -21,13 +25,16 @@ public class Player : MonoBehaviour, IDaño
         onRecibirDaño.AddListener(RecibirDaño);
     }
 
-    void Update()
+    private void Update()
     {
+        // Comprobar si el jugador está en el suelo
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
+
         // Movimiento del jugador
         float move = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(move * speed, rb.velocity.y);
 
-        if (Input.GetButtonDown("Jump") && Mathf.Abs(rb.velocity.y) < 0.001f)
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
         }
@@ -44,8 +51,13 @@ public class Player : MonoBehaviour, IDaño
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.CompareTag("Suelo"))
+        {
+            isGrounded = true;
+        }
+
         if (collision.gameObject.TryGetComponent<IRecolectable>(out IRecolectable recolectable))
         {
             recolectable.Recolectar();
@@ -54,6 +66,14 @@ public class Player : MonoBehaviour, IDaño
         else if (collision.gameObject.TryGetComponent<IDaño>(out IDaño daño))
         {
             onRecibirDaño.Invoke(1);
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Suelo"))
+        {
+            isGrounded = false;
         }
     }
 }
