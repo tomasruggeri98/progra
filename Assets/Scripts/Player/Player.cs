@@ -73,6 +73,10 @@ public class Player : MonoBehaviour, IDaño
         {
             onRecibirDaño.Invoke(1);
         }
+        else if (collision.gameObject.TryGetComponent<IRecolectable>(out IRecolectable recolectable))
+        {
+            recolectable.Recolectar(); // Maneja la recolección
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)

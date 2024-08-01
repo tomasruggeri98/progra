@@ -25,4 +25,13 @@ public class Proyectil : MonoBehaviour
             Destroy(gameObject); // Destruir el proyectil al chocar con un enemigo
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        // Verificar si el proyectil ha chocado con un objeto que tenga la etiqueta "Enemy"
+        if (collider.CompareTag("Enemy"))
+        {
+            Destroy(gameObject); // Destruir el proyectil al chocar con un enemigo
+        }
+    }
 }
