@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9de7aedc2ae0b094e957e01558b327b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nuevoGravityScale: 0.7
+  nuevoGravityScale: 0.5
   onRecolectar:
     m_PersistentCalls:
       m_Calls:

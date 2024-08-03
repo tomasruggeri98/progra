@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Proyectil : MonoBehaviour
 {
-    public float speed = 10f; // Velocidad del proyectil
+    
     private Vector2 direction; // Dirección del proyectil
 
     // Método para establecer la dirección del proyectil
@@ -14,7 +14,7 @@ public class Proyectil : MonoBehaviour
     private void Update()
     {
         // Mover el proyectil en la dirección establecida
-        transform.Translate(direction * speed * Time.deltaTime);
+        transform.Translate(direction * Time.deltaTime);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

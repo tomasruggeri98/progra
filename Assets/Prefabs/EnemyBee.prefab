@@ -216,7 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d85a42a15ba94a340b6846dd43316a36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vida: 3
+  vida: 4
   "onRecibirDa\xF1o":
     m_PersistentCalls:
       m_Calls:
@@ -247,5 +247,5 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  velocidadMovimiento: 2
-  tiempoDeVida: 10
+  velocidadMovimiento: 2.5
+  tiempoDeVida: 27
